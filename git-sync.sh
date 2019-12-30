@@ -19,7 +19,7 @@ then
 fi
 if ! echo $DESTINATION_REPO | grep '.git'
 then
-  if [[ -n "$SSH_PRIVATE_KEY" ]]
+  if [[ -n "$SSH_PRIVATE_KEY_DESTINATION" ]]
   then
     DESTINATION_REPO="git@github.com:${DESTINATION_REPO}.git"
     GIT_SSH_COMMAND="ssh -v"
@@ -33,4 +33,5 @@ echo "DESTINATION=$DESTINATION_REPO:$DESTINATION_BRANCH"
 
 git clone "$SOURCE_REPO" --origin source && cd `basename "$SOURCE_REPO" .git`
 git remote add destination "$DESTINATION_REPO"
+export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa_destination"
 git push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}" -f

@@ -29,10 +29,12 @@ jobs:
         DESTINATION_REPO: ""
         DESTINATION_BRANCH: ""
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_PRIVATE_KEY_DESTINATION: ${{ secrets.SSH_PRIVATE_KEY }}
       with:
         args: $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH
 ```
-`SSH_PRIVATE_KEY` can be omitted if using authenticated HTTPS repo clone urls like `https://username:access_token@github.com/username/repository.git`.
+1. `SSH_PRIVATE_KEY` can be omitted if using authenticated HTTPS repo clone urls like `https://username:access_token@github.com/username/repository.git`.
+1. `SSH_PRIVATE_KEY_DESTINATION` can be omitted. If the env is ommited and `SSH_PRIVATE_KEY` is set, then the env will be set to the value of `SSH_PRIVATE_KEY`.
 
 #### Advanced: Sync all branches
 
